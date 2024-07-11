@@ -21,7 +21,6 @@ sensor_data_collector.py
 ```
 
 > [!Note]
-> **Explanation:**
 > **RabbitMQ Integration:** The script now includes a function publish_data_to_rabbitmq that connects to RabbitMQ and publishes the formatted pressure data as a message to the specified queue (RABBITMQ_QUEUE).
 
 > **Data Formatting:** The data is formatted into a string containing index, epoch time, current time, and pressure value.
