@@ -57,33 +57,22 @@ Telegraf is used to collect, process, and send metrics to InfluxDB. You can inst
   organization = "your_organization"
   bucket = "your_bucket"
 ```
-
 **Replace guest:** guest@localhost:5672/ with your RabbitMQ connection details and adjust other parameters as needed.
 
 ## Installing RabbitMQ on Raspberry Pi
 If you haven't installed RabbitMQ yet, you can do so using the following commands:
-
-bash
-Copy code
 ```
 sudo apt update
 sudo apt install rabbitmq-server
 ```
-
 **Configuring RabbitMQ**
 Enable RabbitMQ Management Plugin:
 Enable the RabbitMQ Management Plugin to access the web management interface:
-
-bash
-Copy code
 ```
 sudo rabbitmq-plugins enable rabbitmq_management
 ```
-
 **Accessing RabbitMQ Management Interface:**
-
 Once enabled, you can access the RabbitMQ management interface from a web browser:
-
 Open a web browser on any computer within the same network as your Raspberry Pi.
 Navigate to http://172.16.7.97:15672 (replace 172.16.7.97 with the actual IP address of your Raspberry Pi where RabbitMQ is installed).
 Log in with the default credentials:
@@ -93,14 +82,12 @@ Password: guest
 ```
 > [!Note]
 > For production use, it's recommended to change the default credentials and set up secure access.
-
 **Creating a Queue:**
 From the RabbitMQ management interface, go to the Queues tab.
 Click on Add a new queue.
 Enter a name for your queue (e.g., pressure_data).
 Leave other settings as default or configure them as per your requirements.
 Click Add queue to create the queue.
-
 **Setting Up Permissions:**
 It’s important to set up permissions so that your Python script can publish messages to the queue:
 * Go to the Admin tab and click on Add a user.
@@ -110,7 +97,6 @@ It’s important to set up permissions so that your Python script can publish me
 * Choose your newly created queue (pressure_data) from the dropdown list.
 * Grant the user permissions to configure, write, and read operations on the queue.
 * Click Set permissions to apply.
-
 ## Note Down RabbitMQ Connection Details:
 **Before running your Python script, note down the following RabbitMQ connection details:**
 ```
@@ -121,14 +107,10 @@ Username and Password: Credentials of the user you created (e.g., producer / pro
 ```
 
 **Running the Script**
-``
 * Save the updated script on your Raspberry Pi.
 * Open a terminal and navigate to the directory containing your script.
-``
 
 Run the script using Python:
-bash
-Copy code
 ```
 python3 pressure_sensor_script.py
 ```
