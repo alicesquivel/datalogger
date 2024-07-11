@@ -60,3 +60,63 @@ Telegraf is used to collect, process, and send metrics to InfluxDB. You can inst
 
 **Replace guest:** guest@localhost:5672/ with your RabbitMQ connection details and adjust other parameters as needed.
 
+## Installing RabbitMQ on Raspberry Pi
+If you haven't installed RabbitMQ yet, you can do so using the following commands:
+
+bash
+Copy code
+```
+sudo apt update
+sudo apt install rabbitmq-server
+```
+
+**Configuring RabbitMQ**
+Enable RabbitMQ Management Plugin:
+Enable the RabbitMQ Management Plugin to access the web management interface:
+
+bash
+Copy code
+```
+sudo rabbitmq-plugins enable rabbitmq_management
+```
+
+**Accessing RabbitMQ Management Interface:**
+
+Once enabled, you can access the RabbitMQ management interface from a web browser:
+
+Open a web browser on any computer within the same network as your Raspberry Pi.
+Navigate to http://172.16.7.97:15672 (replace 172.16.7.97 with the actual IP address of your Raspberry Pi where RabbitMQ is installed).
+Log in with the default credentials:
+```
+Username: guest
+Password: guest
+```
+> [!Note]
+> For production use, it's recommended to change the default credentials and set up secure access.
+
+**Creating a Queue:**
+From the RabbitMQ management interface, go to the Queues tab.
+Click on Add a new queue.
+Enter a name for your queue (e.g., pressure_data).
+Leave other settings as default or configure them as per your requirements.
+Click Add queue to create the queue.
+
+**Setting Up Permissions:**
+It’s important to set up permissions so that your Python script can publish messages to the queue:
+
+Go to the Admin tab and click on Add a user.
+Enter a username and password for your new user (e.g., producer with password producer123).
+Click Add user to create the user.
+After creating the user, click on the Set permissions button next to the user.
+Choose your newly created queue (pressure_data) from the dropdown list.
+Grant the user permissions to configure, write, and read operations on the queue.
+Click Set permissions to apply.
+Note Down RabbitMQ Connection Details:
+
+**Before running your Python script, note down the following RabbitMQ connection details:**
+
+Host: IP address of your Raspberry Pi (172.16.7.97 in your case).
+Port: RabbitMQ default port is 5672.
+Virtual Host: Default virtual host is /.
+Username and Password: Credentials of the user you created (e.g., producer / producer123).
+
