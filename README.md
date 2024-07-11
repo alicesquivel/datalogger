@@ -120,3 +120,21 @@ Port: RabbitMQ default port is 5672.
 Virtual Host: Default virtual host is /.
 Username and Password: Credentials of the user you created (e.g., producer / producer123).
 ```
+
+**Running the Script**
+Save the updated script on your Raspberry Pi.
+Open a terminal and navigate to the directory containing your script.
+Run the script using Python:
+
+bash
+Copy code
+```
+python3 pressure_sensor_script.py
+```
+Monitor the terminal for messages indicating that data is being published to RabbitMQ.
+
+Verifying RabbitMQ Setup
+```
+Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
+Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
+```
