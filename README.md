@@ -67,7 +67,7 @@ It’s important to set up permissions so that your Python script can publish me
 * Choose your newly created queue (pressure_data) from the dropdown list.
 * Grant the user permissions to configure, write, and read operations on the queue.
 * Click Set permissions to apply.
-* 
+  
 ## Note Down RabbitMQ Connection Details:
 **Before running your Python script, note down the following RabbitMQ connection details:**
 ```
