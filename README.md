@@ -114,9 +114,9 @@ Click Set permissions to apply.
 Note Down RabbitMQ Connection Details:
 
 **Before running your Python script, note down the following RabbitMQ connection details:**
-
+```
 Host: IP address of your Raspberry Pi (172.16.7.97 in your case).
 Port: RabbitMQ default port is 5672.
 Virtual Host: Default virtual host is /.
 Username and Password: Credentials of the user you created (e.g., producer / producer123).
-
+```
