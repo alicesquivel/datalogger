@@ -91,5 +91,12 @@ Monitor the terminal for messages indicating that data is being published to Rab
 * Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
 * Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
 
+# Connecting RabbitMQ to Telegraf
+To connect your script to Telegraf for integration with InfluxDB, you need to update your script to publish data in a format that Telegraf can read from a RabbitMQ queue. Telegraf will then forward this data to InfluxDB.
+
+**Step 1:** Update the Python Script
+Modify the script to remove direct InfluxDB writes and ensure it publishes data to RabbitMQ in a format that Telegraf can parse.
+
+
 
 
