@@ -134,8 +134,7 @@ python3 pressure_sensor_script.py
 ```
 Monitor the terminal for messages indicating that data is being published to RabbitMQ.
 
-Verifying RabbitMQ Setup
-```
+**Verifying RabbitMQ Setup**
 * Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
 * Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
-```
+
