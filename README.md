@@ -103,16 +103,15 @@ Click Add queue to create the queue.
 
 **Setting Up Permissions:**
 It’s important to set up permissions so that your Python script can publish messages to the queue:
+* Go to the Admin tab and click on Add a user.
+* Enter a username and password for your new user (e.g., producer with password producer123).
+* Click Add user to create the user.
+* After creating the user, click on the Set permissions button next to the user.
+* Choose your newly created queue (pressure_data) from the dropdown list.
+* Grant the user permissions to configure, write, and read operations on the queue.
+* Click Set permissions to apply.
 
-Go to the Admin tab and click on Add a user.
-Enter a username and password for your new user (e.g., producer with password producer123).
-Click Add user to create the user.
-After creating the user, click on the Set permissions button next to the user.
-Choose your newly created queue (pressure_data) from the dropdown list.
-Grant the user permissions to configure, write, and read operations on the queue.
-Click Set permissions to apply.
-Note Down RabbitMQ Connection Details:
-
+## Note Down RabbitMQ Connection Details:
 **Before running your Python script, note down the following RabbitMQ connection details:**
 ```
 Host: IP address of your Raspberry Pi (172.16.7.97 in your case).
@@ -122,10 +121,12 @@ Username and Password: Credentials of the user you created (e.g., producer / pro
 ```
 
 **Running the Script**
-Save the updated script on your Raspberry Pi.
-Open a terminal and navigate to the directory containing your script.
-Run the script using Python:
+``
+* Save the updated script on your Raspberry Pi.
+* Open a terminal and navigate to the directory containing your script.
+``
 
+Run the script using Python:
 bash
 Copy code
 ```
@@ -135,6 +136,6 @@ Monitor the terminal for messages indicating that data is being published to Rab
 
 Verifying RabbitMQ Setup
 ```
-Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
-Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
+* Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
+* Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
 ```
