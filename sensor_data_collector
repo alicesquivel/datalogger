@@ -4,14 +4,6 @@ import time
 from datetime import datetime
 import smbus
 import pika  # Import RabbitMQ library
-from influxdb_client import InfluxDBClient, Point
-from influxdb_client.client.write_api import SYNCHRONOUS
-
-# InfluxDB configuration
-INFLUXDB_URL = "http://172.16.7.97:8086"
-INFLUXDB_TOKEN = "ZqvyCLLID504lvrHgS0GMx8M_bG4cicy5zZEuk4MKbNo3rkek9xyDfK6iJqwcp6BjPPkyijMb4zFSFDoEQFVQg=="
-INFLUXDB_ORG = "uchicago"
-INFLUXDB_BUCKET = "sensor"
 
 # RabbitMQ configuration
 RABBITMQ_HOST = '172.16.7.97'
@@ -82,23 +74,6 @@ def publish_data_to_rabbitmq(data):
     print(f" [x] Sent {data} to RabbitMQ")
     connection.close()
 
-def write_to_influxdb(index, epoch_time, pressure_data):
-    # Create a connection to InfluxDB
-    client = InfluxDBClient(url=INFLUXDB_URL, token=INFLUXDB_TOKEN)
-    write_api = client.write_api(write_options=SYNCHRONOUS)
-
-    # Define the point to write
-    point = Point("pressure") \
-        .tag("index", index) \
-        .field("epoch_time", epoch_time) \
-        .field("pressure", pressure_data)
-
-    # Write point to InfluxDB
-    write_api.write(INFLUXDB_BUCKET, INFLUXDB_ORG, point)
-
-    # Close client connection
-    client.close()
-
 if __name__ == '__main__':
     PRESS_DATA = 0.0
     u8Buf = [0, 0, 0]
@@ -130,9 +105,6 @@ if __name__ == '__main__':
 
                 # Publish data to RabbitMQ
                 publish_data_to_rabbitmq(data)
-
-                # Write data to InfluxDB
-                write_to_influxdb(index, epoch_time, PRESS_DATA)
 
                 # Increment index for the next data point
                 index += 1
