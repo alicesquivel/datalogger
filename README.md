@@ -42,3 +42,18 @@ Telegraf is used to collect, process, and send metrics to InfluxDB. You can inst
 **Installation:** Follow the Telegraf installation instructions for your platform.
 
 **Configuration:** Configure Telegraf to collect data from RabbitMQ. You'll need to edit Telegraf's configuration file (telegraf.conf) to include an input plugin for RabbitMQ and an output plugin for InfluxDB. Here’s a basic example:
+
+```
+[[inputs.rabbitmq_consumer]]
+  name = "rabbitmq_consumer"
+  endpoints = ["amqp://guest:guest@localhost:5672/"]  # Adjust RabbitMQ connection details
+  queue = "pressure_data"  # Adjust to match your RabbitMQ queue name
+  consumer_tag = "telegraf"
+  data_format = "json"
+
+[[outputs.influxdb_v2]]
+  urls = ["http://localhost:8086"]  # Adjust InfluxDB URL if necessary
+  token = "$INFLUXDB_TOKEN"
+  organization = "your_organization"
+  bucket = "your_bucket"
+```
