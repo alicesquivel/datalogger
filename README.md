@@ -29,36 +29,6 @@ sensor_data_collector.py
 > Ensure your RabbitMQ server is running and accessible from the machine where this script will run.
 > Modify RABBITMQ_QUEUE if needed to match the queue name you want to use in RabbitMQ.
 
-## Install InfluxDB
-First, you'll need to install and configure InfluxDB:
-
-**Installation:** Follow the official [InfluxDB installation instructions](https://docs.influxdata.com/influxdb/v2/get-started/setup/) for your operating system. 
-
-**Configuration:** Configure InfluxDB, including creating databases and setting up authentication if necessary. You typically interact with InfluxDB through its command-line interface (CLI) or API.
-
-## Install Telegraf
-Telegraf is used to collect, process, and send metrics to InfluxDB. You can install it on the same machine where your Python script runs or on a separate server if needed:
-
-**Installation:** Follow the Telegraf installation instructions for your platform.
-
-**Configuration:** Configure Telegraf to collect data from RabbitMQ. You'll need to edit Telegraf's configuration file (telegraf.conf) to include an input plugin for RabbitMQ and an output plugin for InfluxDB. Here’s a basic example:
-
-```
-[[inputs.rabbitmq_consumer]]
-  name = "rabbitmq_consumer"
-  endpoints = ["amqp://guest:guest@localhost:5672/"]  # Adjust RabbitMQ connection details
-  queue = "pressure_data"  # Adjust to match your RabbitMQ queue name
-  consumer_tag = "telegraf"
-  data_format = "json"
-
-[[outputs.influxdb_v2]]
-  urls = ["http://localhost:8086"]  # Adjust InfluxDB URL if necessary
-  token = "$INFLUXDB_TOKEN"
-  organization = "your_organization"
-  bucket = "your_bucket"
-```
-**Replace guest:** guest@localhost:5672/ with your RabbitMQ connection details and adjust other parameters as needed.
-
 ## Installing RabbitMQ on Raspberry Pi
 If you haven't installed RabbitMQ yet, you can do so using the following commands:
 ```
@@ -97,6 +67,7 @@ It’s important to set up permissions so that your Python script can publish me
 * Choose your newly created queue (pressure_data) from the dropdown list.
 * Grant the user permissions to configure, write, and read operations on the queue.
 * Click Set permissions to apply.
+* 
 ## Note Down RabbitMQ Connection Details:
 **Before running your Python script, note down the following RabbitMQ connection details:**
 ```
@@ -119,4 +90,6 @@ Monitor the terminal for messages indicating that data is being published to Rab
 **Verifying RabbitMQ Setup**
 * Access the RabbitMQ management interface (http://172.16.7.97:15672) from your web browser.
 * Navigate to the Queues tab and verify that the pressure_data queue shows messages being delivered.
+
+
 
