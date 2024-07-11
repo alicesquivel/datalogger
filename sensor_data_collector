@@ -98,7 +98,7 @@ if __name__ == '__main__':
                 current_time = datetime.now().strftime("%S/%d/%m/%Y")
 
                 # Prepare data to publish
-                data = f'Index: {index}, Epoch Time: {epoch_str}s, Time: {current_time}, Pressure: {PRESS_DATA:.2f} hPa'
+                data = f'pressure_data,host=raspberrypi index={index},epoch_time={epoch_time},pressure={PRESS_DATA:.2f}'
 
                 # Print data for reference
                 print(data)
