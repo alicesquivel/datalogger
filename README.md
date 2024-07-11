@@ -97,6 +97,53 @@ To connect your script to Telegraf for integration with InfluxDB, you need to up
 **Step 1:** Update the Python Script
 Modify the script to remove direct InfluxDB writes and ensure it publishes data to RabbitMQ in a format that Telegraf can parse.
 
+**Step 2:** Configure Telegraf
+Install Telegraf (if not already installed):
+```
+sudo apt-get update
+sudo apt-get install telegraf
+Configure Telegraf to read from RabbitMQ and write to InfluxDB:
+```
+
+Edit the Telegraf configuration file (usually located at /etc/telegraf/telegraf.conf):
+```
+sudo nano /etc/telegraf/telegraf.conf
+Add the RabbitMQ input and InfluxDB output plugins:
+```
+
+```
+[[inputs.rabbitmq]]
+  url = "amqp://producer:producer123@172.16.7.97:5672"
+  # Assuming pressure_data queue
+  queue_name_include = ["pressure_data"]
+  data_format = "influx"
+
+[[outputs.influxdb_v2]]
+  urls = ["http://172.16.7.97:8086"]
+  token = "ZqvyCLLID504lvrHgS0GMx8M_bG4cicy5zZEuk4MKbNo3rkek9xyDfK6iJqwcp6BjPPkyijMb4zFSFDoEQFVQg=="
+  organization = "uchicago"
+  bucket = "sensor"
+```
+
+Restart Telegraf to apply the configuration changes:
+```
+sudo systemctl restart telegraf
+```
+
+**Step 3:** Verify the Setup
+Run your Python script:
+```
+python your_script_name.py
+```
+
+  **Check Telegraf logs to ensure data is being processed:**
+```
+sudo journalctl -u telegraf -f
+```
+
+  **Verify data in InfluxDB:**
+You can use the InfluxDB UI or influx CLI to query the data.
+
 
 
 
