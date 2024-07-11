@@ -14,3 +14,5 @@ Ensure you have pika installed. You can install it using pip if you haven't alre
 ```
 pip install pika
 ```
+## Modify the Script:
+Here's an example of how you can modify your existing script to publish the pressure data to RabbitMQ:
