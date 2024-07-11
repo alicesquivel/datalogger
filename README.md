@@ -32,7 +32,7 @@ sensor_data_collector.py
 ## Install InfluxDB
 First, you'll need to install and configure InfluxDB:
 
-**Installation:** Follow the official InfluxDB installation instructions for your operating system.
+**Installation:** Follow the official [InfluxDB installation instructions](https://docs.influxdata.com/influxdb/v2/get-started/setup/) for your operating system. 
 
 **Configuration:** Configure InfluxDB, including creating databases and setting up authentication if necessary. You typically interact with InfluxDB through its command-line interface (CLI) or API.
 
