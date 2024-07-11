@@ -28,3 +28,17 @@ sensor_data_collector.py
 > **Connection Parameters:** Replace RABBITMQ_HOST with your RabbitMQ server's hostname or IP address.
 > Ensure your RabbitMQ server is running and accessible from the machine where this script will run.
 > Modify RABBITMQ_QUEUE if needed to match the queue name you want to use in RabbitMQ.
+
+## Install InfluxDB
+First, you'll need to install and configure InfluxDB:
+
+**Installation:** Follow the official InfluxDB installation instructions for your operating system.
+
+**Configuration:** Configure InfluxDB, including creating databases and setting up authentication if necessary. You typically interact with InfluxDB through its command-line interface (CLI) or API.
+
+## Install Telegraf
+Telegraf is used to collect, process, and send metrics to InfluxDB. You can install it on the same machine where your Python script runs or on a separate server if needed:
+
+**Installation:** Follow the Telegraf installation instructions for your platform.
+
+**Configuration:** Configure Telegraf to collect data from RabbitMQ. You'll need to edit Telegraf's configuration file (telegraf.conf) to include an input plugin for RabbitMQ and an output plugin for InfluxDB. Here’s a basic example:
