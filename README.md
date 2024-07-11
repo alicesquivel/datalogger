@@ -57,3 +57,6 @@ Telegraf is used to collect, process, and send metrics to InfluxDB. You can inst
   organization = "your_organization"
   bucket = "your_bucket"
 ```
+
+**Replace guest:** guest@localhost:5672/ with your RabbitMQ connection details and adjust other parameters as needed.
+
