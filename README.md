@@ -136,12 +136,11 @@ Run your Python script:
 python your_script_name.py
 ```
 
-  **Check Telegraf logs to ensure data is being processed:**
+Check Telegraf logs to ensure data is being processed:
 ```
 sudo journalctl -u telegraf -f
 ```
-
-  **Verify data in InfluxDB:**
+Verify data in InfluxDB:
 You can use the InfluxDB UI or influx CLI to query the data.
 
 
