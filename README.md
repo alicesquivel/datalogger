@@ -104,6 +104,66 @@ Try running the script again:
 python3 mosquitto.py
 ```
 
+# To send data from your MQTT broker to Telegraf and then save it to InfluxDB, you'll need to follow these steps:
+
+1. Install and Configure Telegraf
+2. Configure Telegraf to Subscribe to MQTT Topics
+3. Configure Telegraf to Write to InfluxDB
+
+**Step 1: Install Telegraf**
+If you haven't already installed Telegraf, you can do so with the following commands:
+```
+sudo apt-get update
+sudo apt-get install telegraf
+```
+**Step 2: Configure Telegraf to Subscribe to MQTT Topics**
+Edit the Telegraf Configuration File:
+Open the Telegraf configuration file:
+```
+sudo nano /etc/telegraf/telegraf.conf
+```
+
+Add MQTT Consumer Plugin:
+Add the following configuration for the MQTT consumer plugin. This configuration tells Telegraf to subscribe to the pressure_data topic on your MQTT broker:
+```
+[[inputs.mqtt_consumer]]
+  servers = ["tcp://localhost:1883"]
+  topics = ["pressure_data"]
+  qos = 0
+  connection_timeout = "30s"
+  client_id = ""
+  username = ""
+  password = ""
+  data_format = "influx"
+
+  [[inputs.mqtt_consumer.tags]]
+    influxdb_database = "sensor"  # Name of the InfluxDB database
+    influxdb_retention_policy = ""  # Retention policy, if any
+```
+**Step 3: Configure Telegraf to Write to InfluxDB**
+Add InfluxDB Output Plugin:
+In the same telegraf.conf file, add the configuration for the InfluxDB output plugin. This configuration tells Telegraf to send the collected data to your InfluxDB instance:
+```
+[[outputs.influxdb_v2]]
+  urls = ["http://localhost:8086"]
+  token = "GRE_ALDeZdPSkz867xMDtQWQP2w9UNRUUtYo7GxH_p6mmXbNrT3fjuIMsYGFGYFPCijGeGAdgK_JnnrCCZG1oA=="
+  organization = "uchicago"
+  bucket = "sensor"
+```
+**Step 4: Start and Enable Telegraf**
+Enable Telegraf to start on boot and then start the service:
+```
+sudo systemctl enable telegraf
+sudo systemctl start telegraf
+```
+**Step 5: Verify the Setup**
+Check Telegraf Logs:
+Ensure that Telegraf is running without errors:
+```
+sudo journalctl -u telegraf -f
+```
+Verify Data in InfluxDB:
+Check your InfluxDB instance to verify that data is being written. You can use the InfluxDB UI or CLI to query the data.
 
 
 ## RabbitMQ
