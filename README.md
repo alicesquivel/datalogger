@@ -211,7 +211,7 @@ Verify data in InfluxDB by querying the InfluxDB instance or using a tool like C
 Example of Python Script Publishing Data to MQTT
 Your Python script should remain unchanged as it is already configured to publish data to the MQTT broker.
 
-> [!TROUBLESHOOTHING]
+> [!CAUTION]
 > **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi. <br>
 > **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB). <br>
 > **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
