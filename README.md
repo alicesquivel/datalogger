@@ -104,7 +104,7 @@ Try running the script again:
 python3 mosquitto.py
 ```
 
-# To send data from your MQTT broker to Telegraf and then save it to InfluxDB, you'll need to follow these steps:
+## To send data from your MQTT broker to Telegraf and then save it to InfluxDB, you'll need to follow these steps:
 
 1. Install and Configure Telegraf
 2. Configure Telegraf to Subscribe to MQTT Topics
