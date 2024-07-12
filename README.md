@@ -121,7 +121,7 @@ Open the Telegraf configuration file:
 sudo nano /etc/telegraf/telegraf.conf
 ```
 
-**Add MQTT Consumer Plugin:** <br>
+**Add MQTT Consumer Plugin:** 
 Add the following configuration for the MQTT consumer plugin. This configuration tells Telegraf to subscribe to the pressure_data topic on your MQTT broker:
 ```
 [[inputs.mqtt_consumer]]
@@ -164,7 +164,6 @@ Verify Data in InfluxDB:
 Check your InfluxDB instance to verify that data is being written. You can use the InfluxDB UI or CLI to query the data.
 
 # Telegraf in a Chameleon node
-
 **Step 1: Install Telegraf on the Cloud Node**
 Follow the instructions to set up a virtual machine (VM) or server in Chameleon, and then install Telegraf on that machine. For Ubuntu, you can use the following commands:
 ```
@@ -212,7 +211,7 @@ Verify data in InfluxDB by querying the InfluxDB instance or using a tool like C
 Example of Python Script Publishing Data to MQTT
 Your Python script should remain unchanged as it is already configured to publish data to the MQTT broker.
 
-> [!Troubleshooting]
+> [!TROUBLESHOOTHING]
 > **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi. <br>
 > **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB). <br>
 > **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
