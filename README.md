@@ -170,6 +170,63 @@ Your Python script should remain unchanged as it is already configured to publis
 > **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
 This setup should allow you to send sensor data from your Raspberry Pi to an MQTT broker, then have Telegraf on a cloud node subscribe to the MQTT topics, and finally write the data to InfluxDB.
 
+## Installing InfluxDB on Ubuntu 22.04 (x86_64)
+Add InfluxData repository:
+```
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo gpg --dearmor -o /usr/share/keyrings/influxdb-archive-keyring.gpg
+```
+Set up the stable repository:
+
+```
+echo "deb [signed-by=/usr/share/keyrings/influxdb-archive-keyring.gpg] https://repos.influxdata.com/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+
+Update the package list:
+```
+sudo apt-get update
+```
+
+Install InfluxDB:
+```
+sudo apt-get install influxdb
+```
+
+Start and enable the InfluxDB service:
+```
+sudo systemctl unmask influxdb.service
+sudo systemctl start influxdb
+sudo systemctl enable influxdb
+```
+
+Verify InfluxDB status (optional):
+```
+sudo systemctl status influxdb
+```
+
+Access the InfluxDB CLI:
+```
+influx
+```
+
+Create a database and user for Telegraf
+Inside the InfluxDB CLI, execute the following commands:
+```
+CREATE DATABASE your_database_name
+CREATE USER your_username WITH PASSWORD 'your_password'
+GRANT ALL ON your_database_name TO your_username
+```
+
+Replace your_database_name, your_username, and 'your_password' with your desired database name, username, and password.
+
+**Exit the InfluxDB CLI:**
+```
+EXIT
+```
+> [!CAUTION]
+> **Additional Notes**
+> InfluxDB should now be installed and running on your system. You can access the InfluxDB web interface at http://localhost:8086 to manage and visualize your data.
+> Configure your Telegraf instance to send data to InfluxDB using the credentials (your_database_name, your_username, your_password) you set up.
+
 # RabbitMQ
 
 # setup
