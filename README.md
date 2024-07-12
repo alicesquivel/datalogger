@@ -4,8 +4,12 @@
 # datalogger
 Data aggregator setup for Avis deployments  
 
-# Options
+## options
 Mosquitto and RabbitMQ
+
+## Mosquitto
+
+## RabbitMQ
 
 # setup
 To integrate data collection with RabbitMQ, you'll need to install the pika library, which provides a Python interface for RabbitMQ. 
