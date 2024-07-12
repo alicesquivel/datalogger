@@ -75,7 +75,6 @@ Ensure that the Mosquitto broker is configured correctly. You can check the conf
 
 **Step 3: Test the MQTT Broker Locally**
 Run a simple test to ensure the MQTT broker is working locally:
-
 Open a terminal and run the subscriber:
 ```
 mosquitto_sub -h localhost -t 'test/topic'
@@ -122,7 +121,7 @@ Open the Telegraf configuration file:
 sudo nano /etc/telegraf/telegraf.conf
 ```
 
-Add MQTT Consumer Plugin:
+**Add MQTT Consumer Plugin:** <br>
 Add the following configuration for the MQTT consumer plugin. This configuration tells Telegraf to subscribe to the pressure_data topic on your MQTT broker:
 ```
 [[inputs.mqtt_consumer]]
