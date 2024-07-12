@@ -208,6 +208,11 @@ Access the InfluxDB CLI:
 influx
 ```
 
+Install InfluxDB CLI:
+```
+sudo apt install influxdb-client
+```
+
 Create a database and user for Telegraf
 Inside the InfluxDB CLI, execute the following commands:
 ```
