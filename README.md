@@ -16,6 +16,7 @@ sudo apt-get upgrade
 ```
 
 **Step 2: Install Python and Required Libraries** 
+
 Ensure you have Python and the required libraries installed:
 ```
 sudo apt-get install python3 python3-pip
@@ -23,6 +24,7 @@ pip3 install smbus2 paho-mqtt
 ```
 
 **Step 3: Install and Configure Mosquitto (MQTT Broker)**
+
 Install Mosquitto:
 ```
 sudo apt-get install mosquitto mosquitto-clients
@@ -36,10 +38,12 @@ sudo systemctl enable mosquitto
 sudo systemctl start mosquitto
 ```
 
-### Step 4: Configure Mosquitto (Optional)
+**Step 4: Configure Mosquitto (Optional)**
+
 You can configure Mosquitto if you need specific settings or authentication. By default, Mosquitto will run with basic configurations suitable for most local setups.
 
-### Step 5: Run the Python Script
+**Step 5: Run the Python Script**
+
 Now you can run your Python script:
 ```
 python3 sensor_data_collector_mosquitto.py
