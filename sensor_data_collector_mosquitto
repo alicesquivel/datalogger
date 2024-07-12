@@ -6,7 +6,7 @@ import smbus
 import paho.mqtt.client as mqtt  # Import MQTT library
 
 # MQTT configuration
-MQTT_BROKER = '172.16.7.97'
+MQTT_BROKER = 'localhost'  # Use 'localhost' if running on the same Raspberry Pi
 MQTT_PORT = 1883
 MQTT_TOPIC = 'pressure_data'
 
@@ -107,4 +107,3 @@ if __name__ == '__main__':
 
     mqtt_client.loop_stop()
     mqtt_client.disconnect()
-
