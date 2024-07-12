@@ -41,7 +41,7 @@ You can configure Mosquitto if you need specific settings or authentication. By 
 ### Step 5: Run the Python Script
 Now you can run your Python script:
 ```
-python3 your_script.py
+python3 sensor_data_collector_mosquitto.py
 ```
 
 **Additional Steps for Testing and Debugging**
