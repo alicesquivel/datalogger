@@ -7,7 +7,7 @@ Data aggregator setup for Avis deployments
 ## Mosquitto 
 Here are the steps and installations you need to set up your Raspberry Pi to run the script using Mosquitto:
 
-**Step 1: Update and Upgrade Your Raspberry Pi** <b>
+**Step 1: Update and Upgrade Your Raspberry Pi** <\b>
 First, make sure your Raspberry Pi is up to date: 
 ```
 sudo apt-get update
