@@ -215,17 +215,16 @@ Example of Python Script Publishing Data to MQTT
 Your Python script should remain unchanged as it is already configured to publish data to the MQTT broker.
 
 > [!CAUTION]
-> Troubleshooting
-> **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi.
-> **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB).
-> **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues.
+> Troubleshooting <br>
+> **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi. <br>
+> **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB). <br>
+> **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
 This setup should allow you to send sensor data from your Raspberry Pi to an MQTT broker, then have Telegraf on a cloud node subscribe to the MQTT topics, and finally write the data to InfluxDB.
 
 # RabbitMQ
 
 # setup
 To integrate data collection with RabbitMQ, you'll need to install the pika library, which provides a Python interface for RabbitMQ. 
-
 Here’s how you can modify your script to publish the pressure data to RabbitMQ:
 
 ## Install pika Library:
