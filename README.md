@@ -4,10 +4,56 @@
 # datalogger
 Data aggregator setup for Avis deployments  
 
-## options
-Mosquitto and RabbitMQ
-
 ## Mosquitto
+Here are the steps and installations you need to set up your Raspberry Pi to run the script using Mosquitto:
+
+### Step 1: Update and Upgrade Your Raspberry Pi
+First, make sure your Raspberry Pi is up to date:
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+### Step 2: Install Python and Required Libraries
+Ensure you have Python and the required libraries installed:
+```
+sudo apt-get install python3 python3-pip
+pip3 install smbus2 paho-mqtt
+```
+
+### Step 3: Install and Configure Mosquitto (MQTT Broker)
+Install Mosquitto:
+```
+sudo apt-get install mosquitto mosquitto-clients
+```
+**Enable Mosquitto to start on boot:**
+```
+sudo systemctl enable mosquitto
+```
+**Start the Mosquitto service:**
+```
+sudo systemctl start mosquitto
+```
+
+### Step 4: Configure Mosquitto (Optional)
+You can configure Mosquitto if you need specific settings or authentication. By default, Mosquitto will run with basic configurations suitable for most local setups.
+
+### Step 5: Run the Python Script
+Now you can run your Python script:
+```
+python3 your_script.py
+```
+
+**Additional Steps for Testing and Debugging**
+You can use Mosquitto clients to publish and subscribe to topics for testing:
+```
+mosquitto_pub -h localhost -t 'test/topic' -m 'Hello, MQTT'
+mosquitto_sub -h localhost -t 'test/topic'
+```
+**Monitor the MQTT messages being published by your script:**
+```
+mosquitto_sub -h 172.16.7.97 -t 'pressure_data'
+```
 
 ## RabbitMQ
 
