@@ -150,7 +150,7 @@ If successful, the output is the following:
 
 ### Pass configuration options to the service
 
-You can use systemd to customize InfluxDB configuration options and pass them to the InfluxDB service.
+You can use systemd to customize InfluxDB [configuration options](https://docs.influxdata.com/influxdb/v2/reference/config-options/#configuration-options) and pass them to the InfluxDB service.
 
 Edit the ```/etc/default/influxdb2 ``` service configuration file to assign configuration directives to influxd command line flags–for example, add one or more <ENV_VARIABLE_NAME>=<COMMAND_LINE_FLAG> lines like the following:
 ```
