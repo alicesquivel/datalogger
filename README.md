@@ -134,4 +134,16 @@ curl -LO https://download.influxdata.com/influxdb/releases/influxdb2_2.7.7-1_amd
 ```
 sudo dpkg -i influxdb2_2.7.7-1_amd64.deb
 ```
+Start the InfluxDB service:
+```
+sudo service influxdb start
+```
+Installing the InfluxDB package creates a service file at /lib/systemd/system/influxdb.service to start InfluxDB as a background service on startup.
+
+To verify that the service is running correctly, restart your system and then enter the following command in your terminal:
+```
+sudo service influxdb status
+```
+If successful, the output is the following:
+<img width="895" alt="image" src="https://github.com/user-attachments/assets/2fa25e8d-5ef9-45dc-bdb2-967b190c2acf">
 
