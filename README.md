@@ -192,7 +192,7 @@ Follow the instructions to set up a virtual machine (VM) or server in Chameleon,
 sudo apt-get update
 sudo apt-get install -y telegraf
 ```
-## Configure Telegraf to Subscribe to MQTT Topics** <br>
+## Configure Telegraf to Subscribe to MQTT Topics
 Edit the Telegraf configuration file to include the MQTT input plugin. You can typically find the Telegraf configuration file at /etc/telegraf/telegraf.conf. Add the following configuration to this file:
 ```
 [[inputs.mqtt_consumer]]
@@ -214,16 +214,16 @@ Edit the Telegraf configuration file to include the MQTT input plugin. You can t
 ```
 Replace YOUR_RASPBERRY_PI_IP with the IP address of your Raspberry Pi, and YOUR_INFLUXDB_API_TOKEN with your actual InfluxDB API token.
 
-### Configure InfluxDB** <br>
+### Configure InfluxDB
 Ensure InfluxDB is running and properly configured on the same cloud node or another node. You can follow the official InfluxDB installation instructions for your cloud environment. Make sure you have created a bucket and an API token.
 
-### Start Telegraf** <br>
+### Start Telegraf
 Start and enable Telegraf on the cloud node:
 ```
 sudo systemctl start telegraf
 sudo systemctl enable telegraf
 ```
-### Test the Setup** <br>
+### Test the Setup
 Publish data to the MQTT broker on your Raspberry Pi using your Python script.
 Verify Telegraf is receiving data from the MQTT broker. Check the Telegraf logs on the cloud node:
 ```
