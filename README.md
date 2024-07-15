@@ -1,7 +1,7 @@
 > [!CAUTION]
 > This is a work in progress.
 
-# Sensor documentation
+# Waveshare SenseHAT with Raspbery PI 
 https://www.waveshare.com/wiki/Sense_HAT_(B)
 
 # datalogger
