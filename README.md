@@ -125,4 +125,4 @@ python3 mosquitto.py
 # InfluxDB and Telegraf in Chameleon node
 
 ## Installing InfluxDB on Ubuntu 22.04 (x86_64)
-[Install InfluxDB](https://docs.influxdata.com/influxdb/v2/install/#download-and-install-influxdb-v2) 
+You can also follow the documentation from the InfluxDB website. [Install InfluxDB](https://docs.influxdata.com/influxdb/v2/install/#download-and-install-influxdb-v2) 
