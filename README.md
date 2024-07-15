@@ -124,8 +124,9 @@ python3 mosquitto.py
 
 # InfluxDB and Telegraf in Chameleon node
 
-## Installing InfluxDB on Ubuntu 22.04 (x86_64)
+### Installing InfluxDB on Ubuntu 22.04 (x86_64)
 You can also follow the documentation from the InfluxDB website. [Install InfluxDB](https://docs.influxdata.com/influxdb/v2/install/#download-and-install-influxdb-v2) 
+
 # Download the InfluxDB package for AMD64
 ```
 curl -LO https://download.influxdata.com/influxdb/releases/influxdb2_2.7.7-1_amd64.deb
@@ -139,7 +140,6 @@ Start the InfluxDB service:
 sudo service influxdb start
 ```
 Installing the InfluxDB package creates a service file at /lib/systemd/system/influxdb.service to start InfluxDB as a background service on startup.
-
 To verify that the service is running correctly, restart your system and then enter the following command in your terminal:
 ```
 sudo service influxdb status
@@ -217,8 +217,8 @@ TimeoutStartSec=0
 [Install]
 WantedBy=multi-user.target
 Alias=influxd.service
-Save and close the file (Ctrl+O, Enter, Ctrl+X).
 ```
+Save and close the file (Ctrl+O, Enter, Ctrl+X).
 Reload systemd and Restart the Service:
 After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
 ```
