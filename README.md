@@ -14,7 +14,7 @@ Data aggregator setup
 ## Mosquitto 
 Here are the steps and installations you need to set up your Raspberry Pi to run the script using Mosquitto:
 
-**Step 1: Update and Upgrade Your Raspberry Pi** 
+**Update and Upgrade Your Raspberry Pi** 
 
 First, make sure your Raspberry Pi is up to date: 
 ```
@@ -22,7 +22,7 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-**Step 2: Install Python and Required Libraries** 
+**Install Python and Required Libraries** 
 
 Ensure you have Python and the required libraries installed:
 ```
@@ -30,7 +30,7 @@ sudo apt-get install python3 python3-pip
 pip3 install smbus2 paho-mqtt
 ```
 
-**Step 3: Install and Configure Mosquitto (MQTT Broker)**
+**Install and Configure Mosquitto (MQTT Broker)**
 
 Install Mosquitto:
 ```
@@ -45,11 +45,11 @@ sudo systemctl enable mosquitto
 sudo systemctl start mosquitto
 ```
 
-**Step 4: Configure Mosquitto (Optional)**
+**Configure Mosquitto (Optional)**
 
 You can configure Mosquitto if you need specific settings or authentication. By default, Mosquitto will run with basic configurations suitable for most local setups.
 
-**Step 5: Run the Python Script**
+**Run the Python Script**
 
 Now you can run your Python script:
 ```
