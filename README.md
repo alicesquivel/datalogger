@@ -1,6 +1,9 @@
 > [!CAUTION]
 > This is a work in progress.
 
+# Sensor documentation
+https://www.waveshare.com/wiki/Sense_HAT_(B)
+
 # datalogger
 Data aggregator setup  
 
