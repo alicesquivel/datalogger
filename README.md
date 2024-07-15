@@ -122,60 +122,7 @@ Try running the script again:
 python3 mosquitto.py
 ```
 
-# Telegraf in a Chameleon node
-**Step 1: Install Telegraf on the Cloud Node** 
-
-Follow the instructions to set up a virtual machine (VM) or server in Chameleon, and then install Telegraf on that machine. For Ubuntu, you can use the following commands:
-```
-sudo apt-get update
-sudo apt-get install -y telegraf
-```
-**Step 2: Configure Telegraf to Subscribe to MQTT Topics** <br>
-Edit the Telegraf configuration file to include the MQTT input plugin. You can typically find the Telegraf configuration file at /etc/telegraf/telegraf.conf. Add the following configuration to this file:
-```
-[[inputs.mqtt_consumer]]
-  servers = ["tcp://YOUR_RASPBERRY_PI_IP:1883"]
-  topics = ["pressure_data"]
-  qos = 0
-  connection_timeout = "30s"
-  persistent_session = true
-  client_id = "telegraf"
-  username = ""
-  password = ""
-  data_format = "influx"
-
-[[outputs.influxdb]]
-  urls = ["http://localhost:8086"] # URL of your InfluxDB instance
-  token = "YOUR_INFLUXDB_API_TOKEN"
-  organization = "uchicago"
-  bucket = "sensor"
-```
-Replace YOUR_RASPBERRY_PI_IP with the IP address of your Raspberry Pi, and YOUR_INFLUXDB_API_TOKEN with your actual InfluxDB API token.
-
-**Step 3: Configure InfluxDB** <br>
-Ensure InfluxDB is running and properly configured on the same cloud node or another node. You can follow the official InfluxDB installation instructions for your cloud environment. Make sure you have created a bucket and an API token.
-
-**Step 4: Start Telegraf** <br>
-Start and enable Telegraf on the cloud node:
-```
-sudo systemctl start telegraf
-sudo systemctl enable telegraf
-```
-**Step 5: Test the Setup** <br>
-Publish data to the MQTT broker on your Raspberry Pi using your Python script.
-Verify Telegraf is receiving data from the MQTT broker. Check the Telegraf logs on the cloud node:
-```
-sudo journalctl -u telegraf -f
-```
-Verify data in InfluxDB by querying the InfluxDB instance or using a tool like Chronograf or Grafana to visualize the data.
-Example of Python Script Publishing Data to MQTT
-Your Python script should remain unchanged as it is already configured to publish data to the MQTT broker.
-
-> [!CAUTION]
-> **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi. <br>
-> **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB). <br>
-> **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
-This setup should allow you to send sensor data from your Raspberry Pi to an MQTT broker, then have Telegraf on a cloud node subscribe to the MQTT topics, and finally write the data to InfluxDB.
+# InfluxDB and Telegraf in Chameleon node
 
 ## Installing InfluxDB on Ubuntu 22.04 (x86_64)
 Add InfluxData repository:
@@ -238,3 +185,57 @@ EXIT
 > **Additional Notes**
 > InfluxDB should now be installed and running on your system. You can access the InfluxDB web interface at http://localhost:8086 to manage and visualize your data.
 > Configure your Telegraf instance to send data to InfluxDB using the credentials (your_database_name, your_username, your_password) you set up.
+
+**Step 2: Install Telegraf on Ubuntu 22.04 (x86_64)
+Follow the instructions to set up a virtual machine (VM) or server in Chameleon, and then install Telegraf on that machine. For Ubuntu, you can use the following commands:
+```
+sudo apt-get update
+sudo apt-get install -y telegraf
+```
+## Configure Telegraf to Subscribe to MQTT Topics** <br>
+Edit the Telegraf configuration file to include the MQTT input plugin. You can typically find the Telegraf configuration file at /etc/telegraf/telegraf.conf. Add the following configuration to this file:
+```
+[[inputs.mqtt_consumer]]
+  servers = ["tcp://YOUR_RASPBERRY_PI_IP:1883"]
+  topics = ["pressure_data"]
+  qos = 0
+  connection_timeout = "30s"
+  persistent_session = true
+  client_id = "telegraf"
+  username = ""
+  password = ""
+  data_format = "influx"
+
+[[outputs.influxdb]]
+  urls = ["http://localhost:8086"] # URL of your InfluxDB instance
+  token = "YOUR_INFLUXDB_API_TOKEN"
+  organization = "uchicago"
+  bucket = "sensor"
+```
+Replace YOUR_RASPBERRY_PI_IP with the IP address of your Raspberry Pi, and YOUR_INFLUXDB_API_TOKEN with your actual InfluxDB API token.
+
+### Configure InfluxDB** <br>
+Ensure InfluxDB is running and properly configured on the same cloud node or another node. You can follow the official InfluxDB installation instructions for your cloud environment. Make sure you have created a bucket and an API token.
+
+### Start Telegraf** <br>
+Start and enable Telegraf on the cloud node:
+```
+sudo systemctl start telegraf
+sudo systemctl enable telegraf
+```
+### Test the Setup** <br>
+Publish data to the MQTT broker on your Raspberry Pi using your Python script.
+Verify Telegraf is receiving data from the MQTT broker. Check the Telegraf logs on the cloud node:
+```
+sudo journalctl -u telegraf -f
+```
+Verify data in InfluxDB by querying the InfluxDB instance or using a tool like Chronograf or Grafana to visualize the data.
+Example of Python Script Publishing Data to MQTT
+Your Python script should remain unchanged as it is already configured to publish data to the MQTT broker.
+
+> [!CAUTION]
+> **1. Network Issues:** Ensure that there are no network issues preventing the cloud node from reaching the MQTT broker on your Raspberry Pi. <br>
+> **2. Firewall Rules:** Make sure that any firewalls or security groups allow traffic on the necessary ports (1883 for MQTT and 8086 for InfluxDB). <br>
+> **3. Logs:** Check the logs of Telegraf and InfluxDB for any error messages that could help in diagnosing issues. <br>
+This setup should allow you to send sensor data from your Raspberry Pi to an MQTT broker, then have Telegraf on a cloud node subscribe to the MQTT topics, and finally write the data to InfluxDB.
+
