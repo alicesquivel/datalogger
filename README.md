@@ -186,12 +186,6 @@ EXIT
 > InfluxDB should now be installed and running on your system. You can access the InfluxDB web interface at http://localhost:8086 to manage and visualize your data.
 > Configure your Telegraf instance to send data to InfluxDB using the credentials (your_database_name, your_username, your_password) you set up.
 
-**Step 2: Install Telegraf on Ubuntu 22.04 (x86_64)
-Follow the instructions to set up a virtual machine (VM) or server in Chameleon, and then install Telegraf on that machine. For Ubuntu, you can use the following commands:
-```
-sudo apt-get update
-sudo apt-get install -y telegraf
-```
 ## Configure Telegraf to Subscribe to MQTT Topics
 Edit the Telegraf configuration file to include the MQTT input plugin. You can typically find the Telegraf configuration file at /etc/telegraf/telegraf.conf. Add the following configuration to this file:
 ```
