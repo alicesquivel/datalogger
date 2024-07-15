@@ -161,3 +161,81 @@ Edit the /lib/systemd/system/influxdb.service file to pass the variables to the 
 ```
 ExecStart=/usr/bin/influxd $ARG1 $ARG2
 ```
+
+## Step-by-Step Instructions
+Edit the ```/etc/default/influxdb2``` File:
+
+This file allows you to set environment variables that the InfluxDB service will use.
+```
+sudo nano /etc/default/influxdb2
+```
+Add your custom configuration directives. For example:
+```
+ARG1="--http-bind-address=:8087"
+ARG2="--storage-wal-fsync-delay=15m"
+```
+Save and close the file (Ctrl+O, Enter, Ctrl+X).
+
+Edit the ```influxdb.service``` File:
+
+Open the systemd service file to pass the variables to the ExecStart value.
+```
+sudo nano /lib/systemd/system/influxdb.service
+```
+Modify the ```ExecStart``` line to use the environment variables. For example, change:
+```
+ExecStart=/usr/lib/influxdb/scripts/influxd-systemd-start.sh
+```
+To:
+
+```
+ExecStart=/usr/bin/influxd $ARG1 $ARG2
+```
+The complete service file might look like this after modification:
+```
+[Unit]
+Description=InfluxDB is an open-source, distributed, time series database
+Documentation=https://docs.influxdata.com/influxdb/
+After=network-online.target
+
+[Service]
+User=influxdb
+Group=influxdb
+LimitNOFILE=65536
+EnvironmentFile=-/etc/default/influxdb2
+ExecStart=/usr/bin/influxd $ARG1 $ARG2
+KillMode=control-group
+Restart=on-failure
+Type=forking
+PIDFile=/var/lib/influxdb/influxd.pid
+StateDirectory=influxdb
+StateDirectoryMode=0750
+LogsDirectory=influxdb
+LogsDirectoryMode=0750
+UMask=0027
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
+Alias=influxd.service
+Save and close the file (Ctrl+O, Enter, Ctrl+X).
+```
+Reload systemd and Restart the Service:
+
+After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
+```
+sudo systemctl daemon-reload
+sudo systemctl restart influxdb
+```
+Verify the Service Status:
+
+Ensure that the InfluxDB service is running with the new configuration.
+```
+sudo systemctl status influxdb
+```
+**Summary**
+Edit ```/etc/default/influxdb2``` to add custom configuration options.
+Edit ```/lib/systemd/system/influxdb.service``` to include the environment variables in the ExecStart line.
+Reload systemd and restart the InfluxDB service to apply the changes.
+Verify the service status to ensure it is running with the new configuration.
+This process ensures that your InfluxDB service uses the custom configuration options defined in the ```/etc/default/influxdb2``` file. The service file references the environment file, and the ```ExecStart``` directive uses the environment variables to configure InfluxDB.
