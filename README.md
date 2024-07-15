@@ -157,74 +157,7 @@ Edit the ```/etc/default/influxdb2 ``` service configuration file to assign conf
 ARG1="--http-bind-address :8087"
 ARG2="--storage-wal-fsync-delay=15m"
 ```
-Edit the /lib/systemd/system/influxdb.service file to pass the variables to the ExecStart value:
+Edit the /lib/systemd/system/influxdb.service file to pass the variables to the ```ExecStart``` value:
 ```
 ExecStart=/usr/bin/influxd $ARG1 $ARG2
-```
-
-To pass the environment variables to the influxd command, you should modify the ```influxd-systemd-start.sh``` script to include the environment variables defined in ```/etc/default/influxdb2```. Here is how you can do it:
-
-## Step-by-Step Instructions:
-Edit the ```/etc/default/influxdb2``` File:
-
-This file allows you to set environment variables that the InfluxDB service will use.
-```
-sudo nano /etc/default/influxdb2
-```
-Add your custom configuration directives. For example:
-```
-ARG1="--http-bind-address=:8087"
-ARG2="--storage-wal-fsync-delay=15m"
-```
-Save and close the file (Ctrl+O, Enter, Ctrl+X).
-
-Modify the ```influxd-systemd-start.sh``` Script:
-
-The ExecStart directive in the systemd service file calls the script located at ```/usr/lib/influxdb/scripts/influxd-systemd-start.sh```. You need to modify this script to include the environment variables.
-
-Open the script:
-```
-sudo nano /usr/lib/influxdb/scripts/influxd-systemd-start.sh
-```
-Modify the script to use the environment variables defined in ```/etc/default/influxdb2```. For example, change the script to:
-```
-#!/bin/bash
-exec /usr/bin/influxd $ARG1 $ARG2
-```
-Save and close the script (Ctrl+O, Enter, Ctrl+X).
-
-Ensure the Systemd Service File References the Environment File:
-
-The provided service file already includes the EnvironmentFile directive. Make sure it points to ```/etc/default/influxdb2```.
-```
-[Service]
-User=influxdb
-Group=influxdb
-LimitNOFILE=65536
-EnvironmentFile=-/etc/default/influxdb2
-ExecStart=/usr/lib/influxdb/scripts/influxd-systemd-start.sh
-KillMode=control-group
-Restart=on-failure
-Type=forking
-PIDFile=/var/lib/influxdb/influxd.pid
-StateDirectory=influxdb
-StateDirectoryMode=0750
-LogsDirectory=influxdb
-LogsDirectoryMode=0750
-UMask=0027
-TimeoutStartSec=0
-```
-Reload Systemd and Restart the Service:
-
-After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
-```
-sudo systemctl daemon-reload
-sudo systemctl restart influxdb
-```
-Verify the Service Status:
-
-Ensure that the InfluxDB service is running with the new configuration.
-
-```
-sudo systemctl status influxdb
 ```
