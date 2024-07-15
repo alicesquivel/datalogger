@@ -161,7 +161,7 @@ Edit the /lib/systemd/system/influxdb.service file to pass the variables to the 
 ```
 ExecStart=/usr/bin/influxd $ARG1 $ARG2
 ```
-Step-by-Step Instructions:
+## Step-by-Step Instructions:
 Edit the ```/etc/default/influxdb2``` File:
 
 This file allows you to set environment variables that the InfluxDB service will use. You should add your custom configuration directives here.
