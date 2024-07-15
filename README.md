@@ -206,20 +206,18 @@ Modify the script to use the environment variables defined in /etc/default/influ
 ```
 #!/bin/bash
 exec /usr/bin/influxd $ARG1 $ARG2
+```
 Save and close the script (Ctrl+O, Enter, Ctrl+X).
 
 Reload Systemd and Restart the Service:
 
 After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
-
-bash
-Copy code
+```
 sudo systemctl daemon-reload
 sudo systemctl restart influxdb
+```
 Verify the Service Status:
-
 Ensure that the InfluxDB service is running with the new configuration.
-
-bash
-Copy code
+```
 sudo systemctl status influxdb
+```
