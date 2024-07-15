@@ -4,6 +4,10 @@
 # Waveshare SenseHAT with Raspbery PI 
 https://www.waveshare.com/wiki/Sense_HAT_(B)
 
+
+<img width="1176" alt="image" src="https://github.com/user-attachments/assets/facf42fb-b988-4493-a587-7f76d80f611d">
+
+
 # datalogger
 Data aggregator setup  
 
