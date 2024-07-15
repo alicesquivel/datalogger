@@ -2,7 +2,7 @@
 > This is a work in progress.
 
 # datalogger
-Data aggregator setup for Avis deployments  
+Data aggregator setup  
 
 ## Mosquitto 
 Here are the steps and installations you need to set up your Raspberry Pi to run the script using Mosquitto:
