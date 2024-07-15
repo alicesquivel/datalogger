@@ -145,5 +145,6 @@ To verify that the service is running correctly, restart your system and then en
 sudo service influxdb status
 ```
 If successful, the output is the following:
+
 <img width="895" alt="image" src="https://github.com/user-attachments/assets/2fa25e8d-5ef9-45dc-bdb2-967b190c2acf">
 
