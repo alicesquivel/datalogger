@@ -161,8 +161,10 @@ Edit the /lib/systemd/system/influxdb.service file to pass the variables to the 
 ```
 ExecStart=/usr/bin/influxd $ARG1 $ARG2
 ```
+Step-by-Step Instructions:
+Edit the ```/etc/default/influxdb2``` File:
 
-**Edit the service configuration file:** This file allows you to set environment variables that can be used in the systemd service.
+This file allows you to set environment variables that the InfluxDB service will use. You should add your custom configuration directives here.
 ```
 sudo nano /etc/default/influxdb2
 ```
@@ -173,42 +175,51 @@ ARG2="--storage-wal-fsync-delay=15m"
 ```
 Save and close the file (Ctrl+O, Enter, Ctrl+X).
 
-**Edit the systemd service file:** This file needs to be modified to include the environment variables in the ExecStart command.
+Ensure the Systemd Service File References the Environment File:
+The provided service file already includes the EnvironmentFile directive. Make sure it is correct and doesn't need any further modification. Here is the relevant section:
 ```
-sudo nano /lib/systemd/system/influxdb.service
-```
-Find the ExecStart line and modify it to include the variables you defined:
-```
-ExecStart=/usr/bin/influxd $ARG1 $ARG2
-```
-The complete service file might look like this:
-```
-[Unit]
-Description=InfluxDB is an open-source, distributed, time series database
-Documentation=https://docs.influxdata.com/influxdb/
-After=network-online.target
-
 [Service]
 User=influxdb
 Group=influxdb
-EnvironmentFile=/etc/default/influxdb2
-ExecStart=/usr/bin/influxd $ARG1 $ARG2
-Restart=on-failure
 LimitNOFILE=65536
-
-[Install]
-WantedBy=multi-user.target
+EnvironmentFile=-/etc/default/influxdb2
+ExecStart=/usr/lib/influxdb/scripts/influxd-systemd-start.sh
+KillMode=control-group
+Restart=on-failure
+Type=forking
+PIDFile=/var/lib/influxdb/influxd.pid
+StateDirectory=influxdb
+StateDirectoryMode=0750
+LogsDirectory=influxdb
+LogsDirectoryMode=0750
+UMask=0027
+TimeoutStartSec=0
 ```
+Modify the ExecStart Script:
 
-Save and close the file (Ctrl+O, Enter, Ctrl+X).
-
-Reload systemd and restart the service: After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
+The ExecStart directive in the systemd service file calls a script ```(/usr/lib/influxdb/scripts/influxd-systemd-start.sh)```. This script should be modified to include the environment variables.
+Open the script:
 ```
+sudo nano /usr/lib/influxdb/scripts/influxd-systemd-start.sh
+```
+Modify the script to use the environment variables defined in /etc/default/influxdb2. For example:
+```
+#!/bin/bash
+exec /usr/bin/influxd $ARG1 $ARG2
+Save and close the script (Ctrl+O, Enter, Ctrl+X).
+
+Reload Systemd and Restart the Service:
+
+After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
+
+bash
+Copy code
 sudo systemctl daemon-reload
 sudo systemctl restart influxdb
-```
-**Verify the service status:** Ensure that the InfluxDB service is running with the new configuration.
-```
-sudo systemctl status influxdb
-```
+Verify the Service Status:
 
+Ensure that the InfluxDB service is running with the new configuration.
+
+bash
+Copy code
+sudo systemctl status influxdb
