@@ -148,7 +148,8 @@ If successful, the output is the following:
 
 <img width="895" alt="image" src="https://github.com/user-attachments/assets/2fa25e8d-5ef9-45dc-bdb2-967b190c2acf">
 
-**Pass configuration options to the service**
+### Pass configuration options to the service
+
 You can use systemd to customize InfluxDB configuration options and pass them to the InfluxDB service.
 
 Edit the ```/etc/default/influxdb2 ``` service configuration file to assign configuration directives to influxd command line flags–for example, add one or more <ENV_VARIABLE_NAME>=<COMMAND_LINE_FLAG> lines like the following:
