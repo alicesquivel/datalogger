@@ -187,7 +187,6 @@ Modify the ```ExecStart``` line to use the environment variables. For example, c
 ExecStart=/usr/lib/influxdb/scripts/influxd-systemd-start.sh
 ```
 To:
-
 ```
 ExecStart=/usr/bin/influxd $ARG1 $ARG2
 ```
@@ -221,19 +220,17 @@ Alias=influxd.service
 Save and close the file (Ctrl+O, Enter, Ctrl+X).
 ```
 Reload systemd and Restart the Service:
-
 After editing the configuration files, reload the systemd configuration and restart the InfluxDB service to apply the changes.
 ```
 sudo systemctl daemon-reload
 sudo systemctl restart influxdb
 ```
 Verify the Service Status:
-
 Ensure that the InfluxDB service is running with the new configuration.
 ```
 sudo systemctl status influxdb
 ```
-**Summary**
+### Summary 
 Edit ```/etc/default/influxdb2``` to add custom configuration options.
 Edit ```/lib/systemd/system/influxdb.service``` to include the environment variables in the ExecStart line.
 Reload systemd and restart the InfluxDB service to apply the changes.
