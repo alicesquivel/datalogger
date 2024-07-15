@@ -126,3 +126,12 @@ python3 mosquitto.py
 
 ## Installing InfluxDB on Ubuntu 22.04 (x86_64)
 You can also follow the documentation from the InfluxDB website. [Install InfluxDB](https://docs.influxdata.com/influxdb/v2/install/#download-and-install-influxdb-v2) 
+# Download the InfluxDB package for AMD64
+```
+curl -LO https://download.influxdata.com/influxdb/releases/influxdb2_2.7.7-1_amd64.deb
+```
+# Install the package
+```
+sudo dpkg -i influxdb2_2.7.7-1_amd64.deb
+```
+
